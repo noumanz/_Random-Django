@@ -18,12 +18,15 @@ def show(request):
 def search(request):
     driver.fullscreen_window()
     driver.get('http://youtube.com/results?search_query={}'.format(request.GET['query']))
+
     try:
         titles = driver.find_elements_by_id('video-title')
     except Exception as e:
         return HttpResponse("Error: {}".format(e))
+
     titles_dict = {}
     count = 0
+
     for title in titles:
         titles_dict[title.get_attribute('href')] = title.text
         count += 1
@@ -33,25 +36,9 @@ def search(request):
 
 def play(request):
     try:
-        number = request.GET['number']
-    except Exception as e:
-        print("ERROR")
-        print(e)
-        number = 1
-
-    try:
         myhref = request.GET['myhref']
+        driver.fullscreen_window()
         driver.get(myhref)
-        return HttpResponse("Done")
-    except:
-        pass
-    driver.fullscreen_window()
-
-    try:
-        titles = driver.find_elements_by_id('video-title')
+        return render(request, 'show.html')
     except Exception as e:
         return HttpResponse("Error: {}".format(e))
-
-    title = titles[int(number)-1]
-    title.click()
-    return HttpResponse("Done")
