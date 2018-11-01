@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Play</title>
+</head>
+<body>
+    <div>
+    {% for k, v in titles.items %}
+        <p><a href="play?myhref={{k}}">{{v}}</a></p>
+    {% endfor %}
+    </div>
+</body>
+</html>
