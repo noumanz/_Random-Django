@@ -24,6 +24,16 @@ def play(request):
         myhref = request.GET['myhref']
         driver.fullscreen_window()
         driver.get(myhref)
-        return render(request, 'show.html')
+        return HttpResponse(status=204)
     except Exception as e:
         return HttpResponse("Error: {}".format(e))
+
+
+def skip(request):
+    try:
+        skip_add = driver.find_element_by_class_name("videoAdUiSkipButton")
+        print(skip_add)
+        skip_add.click()
+    except Exception as e:
+        print(e)
+    return HttpResponse(status=204)

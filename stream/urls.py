@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.show),
     path('search/', views.search, name='search'),
     path('search/play/', views.play),
+    path('search/skip', views.skip),
 ]
