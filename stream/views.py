@@ -1,14 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from selenium import webdriver
+import requests
+
+from .utils import *
 
 driver = webdriver.Chrome('/home/nouman/Downloads/chromedriver')
-
-
-def watch(request):
-    url = request.GET['url']
-    driver.fullscreen_window()
-    driver.get(url)
 
 
 def show(request):
@@ -17,21 +14,9 @@ def show(request):
 
 def search(request):
     driver.fullscreen_window()
-    driver.get('http://youtube.com/results?search_query={}'.format(request.GET['query']))
-
-    try:
-        titles = driver.find_elements_by_id('video-title')
-    except Exception as e:
-        return HttpResponse("Error: {}".format(e))
-
-    titles_dict = {}
-    count = 0
-
-    for title in titles:
-        titles_dict[title.get_attribute('href')] = title.text
-        count += 1
-
-    return render(request, 'play.html', {"titles": titles_dict})
+    search_page = requests.get('http://youtube.com/results?search_query={}'.format(request.GET['query']))
+    searches = fix_and_beautify_youtube(search_page)
+    return HttpResponse(searches)
 
 
 def play(request):
