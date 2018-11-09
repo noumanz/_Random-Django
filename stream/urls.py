@@ -23,4 +23,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('search/play/', views.play),
     path('search/skip', views.skip),
+    path('search/fullscreen', views.fullscreen),
+    path('search/mute', views.mute),
+    path('search/pause', views.pause)
 ]

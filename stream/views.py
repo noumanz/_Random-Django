@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import requests
 
 from .utils import *
@@ -32,8 +33,48 @@ def play(request):
 def skip(request):
     try:
         skip_add = driver.find_element_by_class_name("videoAdUiSkipButton")
-        print(skip_add)
         skip_add.click()
+    except Exception as e:
+        print(e)
+    try:
+        skip_add = driver.find_element_by_class_name("svg-close-button")
+        skip_add.click()
+    except Exception as e:
+        print(e)
+    try:
+        skip_add = driver.find_element_by_class_name("ytp-ad-overlay-close-button")
+        skip_add.click()
+    except Exception as e:
+        print(e)
+    return HttpResponse(status=204)
+
+
+def fullscreen(request):
+    try:
+        pause = driver.find_element_by_class_name("video-stream")
+        pause.click()
+        fullscreen_button = driver.find_element_by_class_name("ytp-fullscreen-button")
+        fullscreen_button.click()
+        pause = driver.find_element_by_class_name("video-stream")
+        pause.click()
+    except Exception as e:
+        print(e)
+    return HttpResponse(status=204)
+
+
+def mute(request):
+    try:
+        mute = driver.find_element_by_class_name("ytp-mute-button")
+        mute.click()
+    except Exception as e:
+        print(e)
+    return HttpResponse(status=204)
+
+
+def pause(request):
+    try:
+        pause = driver.find_element_by_class_name("video-stream")
+        pause.click()
     except Exception as e:
         print(e)
     return HttpResponse(status=204)

@@ -24,11 +24,12 @@ def fix_and_beautify_youtube(search_page):
     searches = re.sub('<li><div class="search-refinements((?!</div></li>.).)+</div></li>', '', searches)
     searches = re.sub('<li><div class="pyv-afc-ads-container"((?!</div></li>.).)+</div></li>', '', searches)
     searches = re.sub('<h3 class="yt-lockup-title\s*">',
-                      '<h3 class="yt-lockup-title\s*" style="font-size:30px; height:100px; width: 700px; margin:0px 10px 10px 10px; overflow: hidden">',
+                      '<h3 class="yt-lockup-title\s*" style="font-size:30px; height:100px; width: 100%; margin:0px 10px 10px 0px; overflow: hidden">',
                       searches)
     searches = re.sub('class="yt-lockup-thumbnail yt-pl-thumb"', 'class="yt-lockup-thumbnail yt-pl-thumb" style="width: 365px;"', searches)
     searches = re.sub('<li class="yt-lockup-playlist-item clearfix"((?!</li>.).)+</li>', '', searches)
     searches = re.sub('<li', '<li style="list-style-type: none;"', searches)
+    searches = re.sub('class="yt-lockup-content"','class="yt-lockup-content" style="width: 60%"', searches)
     print(searches)
     searches = get_nav_bar() + searches
     return searches
