@@ -31,7 +31,7 @@ def fix_and_beautify_youtube(search_page):
     searches = re.sub('<li', '<li style="list-style-type: none;"', searches)
     searches = re.sub('class="yt-lockup-content"','class="yt-lockup-content" style="width: 60%"', searches)
     print(searches)
-    searches = get_nav_bar() + searches
+    searches = '<body style="margin:0">' + get_nav_bar() + searches + '</body>'
     return searches
 
 

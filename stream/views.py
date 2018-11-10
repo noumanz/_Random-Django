@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 import requests
 
 from .utils import *
@@ -14,16 +13,20 @@ def show(request):
 
 
 def search(request):
-    driver.fullscreen_window()
-    search_page = requests.get('http://youtube.com/results?search_query={}'.format(request.GET['query']))
-    searches = fix_and_beautify_youtube(search_page)
-    return HttpResponse(searches)
+    # driver.fullscreen_window()()
+    if request.GET.get('action') == "SEARCH":
+        search_page = requests.get('http://youtube.com/results?search_query={}'.format(request.GET['query']))
+        searches = fix_and_beautify_youtube(search_page)
+        return HttpResponse(searches)
+    else:
+        driver.get(request.GET['query'])
+        return HttpResponse(status=204)
 
 
 def play(request):
     try:
         myhref = request.GET['myhref']
-        driver.fullscreen_window()
+        # driver.fullscreen_window()()
         driver.get(myhref)
         return HttpResponse(status=204)
     except Exception as e:
