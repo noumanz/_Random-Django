@@ -25,5 +25,6 @@ urlpatterns = [
     path('search/skip', views.skip),
     path('search/fullscreen', views.fullscreen),
     path('search/mute', views.mute),
-    path('search/pause', views.pause)
+    path('search/pause', views.pause),
+    path('search/next', views.next_video)
 ]

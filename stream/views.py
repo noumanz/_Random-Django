@@ -49,6 +49,16 @@ def skip(request):
         skip_add.click()
     except Exception as e:
         print(e)
+    try:
+        skip_add = driver.find_element_by_class_name("ytp-ad-skip-button")
+        skip_add.click()
+    except Exception as e:
+        print(e)
+    try:
+        skip_add = driver.find_element_by_class_name("ytp-ad-skip-button-icon")
+        skip_add.click()
+    except Exception as e:
+        print(e)
     return HttpResponse(status=204)
 
 
@@ -77,6 +87,15 @@ def mute(request):
 def pause(request):
     try:
         pause = driver.find_element_by_class_name("video-stream")
+        pause.click()
+    except Exception as e:
+        print(e)
+    return HttpResponse(status=204)
+
+
+def next_video(request):
+    try:
+        pause = driver.find_element_by_class_name("ytp-next-button")
         pause.click()
     except Exception as e:
         print(e)
